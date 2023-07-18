@@ -1,0 +1,20 @@
+name: commerce
+services:
+  database:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=commerce
+    volumes:
+      - /database:/var/lib/mysql
+  commerce:
+    build:
+      context: ./commerce
+    ports:
+      - 9001:9001
+      - 9002:9002
+    volumes:
+      - ./commerce:/commerce
+      - ../git:/git
